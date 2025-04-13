@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>cattle stock</title>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"></link> -->
+        <!-- Favicon-->
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="http://127.0.0.1:5000/static/css/styles.css" rel="stylesheet" />
+        <style>
+            #Box{
+                padding: 25px;
+                background-color: white;
+                height: 65vh;
+            }
+            .row{
+                margin-top: 150px;
+            }
+            body{
+                background-color: aliceblue;
+            }
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <!-- <li class="nav-item"><a class="nav-link" href="#page-top">AUTISM</a></li> -->
+                <a class="navbar-brand h1" href="#page-top">cattle Livestock</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/add_data">Cattle</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/lumpy_disease">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reminder">Reminder</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/market">Market</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/tracking">tracking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile">{{name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div id="Box">
+                        <center><h3>Add cattle</h3></center>
+                        <hr>
+                        <br>
+                        <form method="post" action="/add_data">
+                            <label for="">Cattle id</label>
+                            <input type="text" class="form-control" name="id" id="transcript" placeholder="Enter cattle id" />
+                            <br>
+                            <label for="">Vaccination date</label>
+                            <input type="date" class="form-control" name="date1" id="transcript" placeholder="Enter cattle id" />
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-success form-control">
+                          </form>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div id="Box">
+                        <center><h3>View cattle details</h3></center>
+                        <hr>
+                        <br>
+                        {% if result %}
+                        <table class="table" style="text-align: left;">
+                            <tr>
+                                <th>cattle id</th>
+                                <th>Vaccination date</th>
+                            </tr>
+                            
+                            {% for row in result %}
+                           
+                            <tr>
+                                <form method="post" action="/Update">
+                                    <td>
+                                      
+                                    <input type="text" value="{{row[0]}}" readonly class="form-control" name="id" id="transcript" required placeholder="Enter cattle id" />
+                                    
+                                    </td>
+                                   <td>
+                                 
+                                    <input type="date" value="{{row[1]}}"  class="form-control" name="date1" id="transcript" required placeholder="Enter cattle id" />
+                                  
+                                   </td>
+                                 <td>
+                                    <input type="submit" value="Update" class="btn btn-success form-control" required>
+                                 </td>
+                                </form>
+                                {% set Id = row[0] %}
+                                <td><a href="{{url_for('Delete', Id=Id)}}" class="btn btn-success">Delete</a></td>
+                            </tr>
+                       
+                            {% endfor %}
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="http://127.0.0.1:5000/static/js/scripts.js"></script>
+        
+    </body>
+</html>
